@@ -16,7 +16,7 @@ Ce fichier est relu par Claude au début de chaque session. Modifiez-le libremen
 
 ## La méthode (toujours dans cet ordre)
 1. **Intention** : `docs/1-INTENTION.md`. 2. **Spécification** : `docs/2-SPEC.md`. 3. **Design** : `docs/3-DESIGN.md` + maquettes. 4. **Développement**.
-- Les prompts de chaque étape sont dans `PROMPTS-INES.md`.
+- Les prompts de chaque étape sont dans `PROMPTS-INES.md` (étapes 0 à 10). Des exemples remplis sont dans `docs/exemples/recette/`.
 - Ne passe jamais à l'étape suivante sans ma validation écrite de l'étape en cours.
 - Ne code rien tant que la spécification et le design ne sont pas validés.
 - Tout écran respecte `docs/3-DESIGN.md`. Toute nouveauté passe d'abord par `docs/2-SPEC.md`.
@@ -25,7 +25,8 @@ Ce fichier est relu par Claude au début de chaque session. Modifiez-le libremen
 ## Outils
 - Code : Next.js (App Router, TypeScript), CSS simple, pas de librairie d'interface.
 - Données et fichiers : Supabase (connecteur Supabase), région eu-west-3 (Paris).
-- Mise en ligne : Vercel (connecteur Vercel). Chaque push sur main redéploie l'app.
+- Mise en ligne : Vercel. Le projet est créé à la main par moi (le connecteur ne peut pas le créer sur un compte Hobby). Ensuite, chaque push sur main redéploie l'app.
+- Maquettes : Claude Design (type « Design », sans design system), une page de 390 × 844 par écran. Le lien du canevas est noté dans `docs/3-DESIGN.md`.
 - E-mails : Resend, toujours envoyés côté serveur (route API), jamais depuis le navigateur.
 
 ## Règles fixes
@@ -34,7 +35,11 @@ Ce fichier est relu par Claude au début de chaque session. Modifiez-le libremen
 - **Base de données** : toute modification = un nouveau fichier `supabase/migrations/NNNN_nom.sql`, appliqué avec le connecteur, puis vérification des « advisors » sécurité. RLS activée sur chaque table, buckets privés.
 - **Avant toute action irréversible** (supprimer une table, un projet, des données) : explique ce qui va se passer et attends mon accord.
 - **Après chaque modification** : `npm run build`, corrige jusqu'à ce que ça passe, puis commit et push sur main.
-- **Mobile d'abord** : écran de 390 px, texte lisible, boutons d'au moins 48 px, libellés visibles au-dessus des champs.
+- **Mobile d'abord** : écran de 390 px, texte lisible, boutons d'au moins 48 px, libellés visibles au-dessus des champs, information jamais portée par la seule couleur. Contrastes mesurés par script, jamais estimés.
+- **Photos** : compressées dans le navigateur et déposées directement dans Supabase Storage, jamais via une route Vercel (limite de 4,5 Mo).
+- **Création de ressources** (projet Supabase, etc.) : uniquement après mon accord écrit dans la conversation, avec le coût annoncé.
+- **Réseau de la session cloud** : si un test ne joint pas Supabase (`Proxy response (403)`), propose d'autoriser l'hôte dans l'environnement ; lance alors Node avec `NODE_USE_ENV_PROXY=1 NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt`.
+- **Playwright est déjà installé** : ne lance jamais `playwright install`.
 
 ## Comment on teste
 - Les critères d'acceptation de `docs/2-SPEC.md` sont le plan de test : je les relis avant de demander le code.
