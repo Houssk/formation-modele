@@ -30,7 +30,7 @@ Ce fichier est relu par Claude au début de chaque session. Modifiez-le libremen
 
 ## Règles fixes
 - **Aucune clé secrète** dans le code, dans le dépôt ou dans le chat. Les clés vont dans Vercel > Settings > Environment Variables, saisies par moi. Dans le dépôt : `.env.example` uniquement.
-- **Connecteur Vercel : ne jamais passer `teamId` ni `slug`** (compte Hobby : provoque un refus 403). Si Vercel répond `repo_not_found`, dis-moi d'autoriser le dépôt dans l'app GitHub Vercel.
+- **Connecteur Vercel** : ne pas passer `teamId` ni `slug` (compte Hobby). Si la **création** du projet échoue (refus 403), ne réessaie pas : donne-moi les étapes pour l'importer moi-même sur vercel.com/new (dépôt, variables publiques Supabase), puis reprends la main pour les déploiements. Si Vercel répond `repo_not_found`, dis-moi d'autoriser le dépôt dans l'app GitHub Vercel.
 - **Base de données** : toute modification = un nouveau fichier `supabase/migrations/NNNN_nom.sql`, appliqué avec le connecteur, puis vérification des « advisors » sécurité. RLS activée sur chaque table, buckets privés.
 - **Avant toute action irréversible** (supprimer une table, un projet, des données) : explique ce qui va se passer et attends mon accord.
 - **Après chaque modification** : `npm run build`, corrige jusqu'à ce que ça passe, puis commit et push sur main.
