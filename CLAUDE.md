@@ -14,6 +14,14 @@ Ce fichier est relu par Claude au début de chaque session. Modifiez-le libremen
 - Objectif : [EN UNE PHRASE]
 - Utilisateurs : [QUI]
 
+## La méthode (toujours dans cet ordre)
+1. **Intention** : `docs/1-INTENTION.md`. 2. **Spécification** : `docs/2-SPEC.md`. 3. **Design** : `docs/3-DESIGN.md` + maquettes. 4. **Développement**.
+- Les prompts de chaque étape sont dans `PROMPTS-INES.md`.
+- Ne passe jamais à l'étape suivante sans ma validation écrite de l'étape en cours.
+- Ne code rien tant que la spécification et le design ne sont pas validés.
+- Tout écran respecte `docs/3-DESIGN.md`. Toute nouveauté passe d'abord par `docs/2-SPEC.md`.
+- Les critères d'acceptation de la spécification sont les tests de l'application.
+
 ## Outils
 - Code : Next.js (App Router, TypeScript), CSS simple, pas de librairie d'interface.
 - Données et fichiers : Supabase (connecteur Supabase), région eu-west-3 (Paris).
@@ -29,7 +37,7 @@ Ce fichier est relu par Claude au début de chaque session. Modifiez-le libremen
 - **Mobile d'abord** : écran de 390 px, texte lisible, boutons d'au moins 48 px, libellés visibles au-dessus des champs.
 
 ## Comment on teste
-- J'écris le plan de test (cas, attendu) avant de demander le code.
+- Les critères d'acceptation de `docs/2-SPEC.md` sont le plan de test : je les relis avant de demander le code.
 - Tu automatises ce plan (Playwright pour les écrans, SQL pour les règles d'accès), tu l'exécutes et tu rends un tableau réussi / échoué avec la cause.
 - Toujours tester : un cas normal, un champ vide, un fichier trop lourd, une personne non autorisée, l'affichage sur téléphone.
 
